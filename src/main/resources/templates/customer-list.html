@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>COUNT</td>
+            <td>ID</td>
+            <td>NAME</td>
+            <td>AGE</td>
+            <td>EMAIL</td>
+            <td>ENTRY_DATE</td>
+            <td>수정</td>
+            <td>삭제</td>
+        </tr>
+        <tr th:each="customer, cState : ${customerList}">
+            <td th:text="${cState.count}"></td>
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.age}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.entryDate}"></td>
+            <td><a th:href="@{/custmerWithThymeleaf/update/{id}(id=${customer.id})}">수정</a></td>
+            <td><a th:href="@{/custmerWithThymeleaf/delete/{id}(id=${customer.id})}">삭제</a></td>
+        </tr>
+    </table>
+<a href="/custmerWithThymeleaf/add">고객 정보 등록</a>
+</body>
+</html>

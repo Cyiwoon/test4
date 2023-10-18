@@ -72,5 +72,13 @@ public class CustmoerService {
         return modelMapper.map(customer,CustomerResDTO.class);
     }
 
+    public CustomerResDTO updateCusttomer(Long id, CustomerReqDTO customerReqDTO){
+        Customer customer = customerRepository.findById(id).orElseThrow(()->new BusinessException("Customer Not Found",HttpStatus.NOT_FOUND));
+        customer.setEmail(customerReqDTO.getEmail());
+        customer.setName(customerReqDTO.getName());
+        customer.setAge(customerReqDTO.getAge());
+        return modelMapper.map(customer,CustomerResDTO.class);
+    }
+
 
 }
