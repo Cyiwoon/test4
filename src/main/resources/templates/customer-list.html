@@ -19,10 +19,10 @@
         <tr th:each="customer, cState : ${customerList}">
             <td th:text="${cState.count}"></td>
             <td th:text="${customer.id}"></td>
-            <td th:text="${customer.name}"></td>
+            <td><a th:href="@{/custmerWithThymeleaf/customer/{id}(id=${customer.id})}"><span th:text="${customer.name}"></span></a></td>
             <td th:text="${customer.age}"></td>
             <td th:text="${customer.email}"></td>
-            <td th:text="${customer.entryDate}"></td>
+            <td th:text="${#temporals.format(customer.entryDate, 'yyyy-MM-dd')}"></td>
             <td><a th:href="@{/custmerWithThymeleaf/update/{id}(id=${customer.id})}">수정</a></td>
             <td><a th:href="@{/custmerWithThymeleaf/delete/{id}(id=${customer.id})}">삭제</a></td>
         </tr>

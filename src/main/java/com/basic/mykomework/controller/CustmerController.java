@@ -19,21 +19,27 @@ public class CustmerController {
     private final CustmoerService custmoerService;
 
     @GetMapping(value = "/customerList")
-    public String getCustomerList(Model model){
-        model.addAttribute("customerList",custmoerService.getCustomers());
+    public String getCustomerList(Model model) {
+        model.addAttribute("customerList", custmoerService.getCustomers());
         return "customer-list";
     }
 
+    @GetMapping(value = "/customer/{id}")
+    public String getCustomer(@PathVariable Long id, Model model) {
+        model.addAttribute("customer", custmoerService.getCustomer(id));
+        return "customer";
+    }
+
     @GetMapping(value = "/add")
-    public String gotoCustomerAddPage(CustomerReqDTO customerReqDTO){
+    public String gotoCustomerAddPage(CustomerReqDTO customerReqDTO) {
 //        return "customer-add";
         return "customer-add";
 
     }
 
     @PostMapping(value = "/add")
-    public String addCustomer(@Valid CustomerReqDTO customerReqDTO, BindingResult result){
-        if(result.hasErrors()){
+    public String addCustomer(@Valid CustomerReqDTO customerReqDTO, BindingResult result) {
+        if (result.hasErrors()) {
             return "customer-add";
         }
         custmoerService.create(customerReqDTO);
@@ -41,8 +47,8 @@ public class CustmerController {
     }
 
     @GetMapping(value = "/update/{id}")
-    public String gotoUpdateCustomer(@PathVariable Long id, Model model){
-        model.addAttribute("customer",custmoerService.getCustomer(id));
+    public String gotoUpdateCustomer(@PathVariable Long id, Model model) {
+        model.addAttribute("customer", custmoerService.getCustomer(id));
         return "customer-update";
     }
 
@@ -54,16 +60,15 @@ public class CustmerController {
             model.addAttribute("customer", customerReqDTO);
             return "customer-update";
         }
-        custmoerService.updateCusttomer(id,customerReqDTO);
+        custmoerService.updateCusttomer(id, customerReqDTO);
         return "redirect:/";
     }
 
-        @PostMapping(value = "/delete/{id}")
-    public String deleteCustomer(@PathVariable Long id){
+    @GetMapping(value = "/delete/{id}")
+    public String deleteCustomer(@PathVariable Long id) {
         custmoerService.deleteCustomer(id);
         return "redirect:/";
     }
-
 
 
 }
